@@ -1,11 +1,9 @@
-﻿using System;
+﻿/* Dean Marsh HND Software Development */
+/* HEMA Codex Project - Graded Unit 2 */
+/* Main code for Windows Form Storerecord in Application */
+
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HEMA_Codex
@@ -147,9 +145,26 @@ namespace HEMA_Codex
             string id = getSelectedId();
             if (id != null)
             {
+                DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                   
+                }
+                else if (result == DialogResult.No)
+                {
+                    
+                }
                 hemaDatabase.deleteRecord(id);
                 this.refreshList();
+                MessageBox.Show("Entry has been succesfully deleted.");
             }
+            
+            txtName.Text = "";
+            txtCountry.Text = "";
+            txtSchool.Text = "";
+            txtDate.Text = "";
+            txtDiscipline.Text = "";
+            txtSource.Text = "";
         }
     }
 }

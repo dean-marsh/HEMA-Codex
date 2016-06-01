@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Dean Marsh HND Software Development */
+/* HEMA Codex Project - Graded Unit 2 */
+/* Main class for the HEMA Database */
+
+
+using System;
 using System.IO;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -10,6 +15,7 @@ namespace HEMA_Codex
     class DatabaseRecord
     {
         /*  Add all database fields */
+        /* Declaring all variable names as string */
         public string name;
         public string country;
         public string school;
@@ -64,7 +70,7 @@ namespace HEMA_Codex
         school, date activety, discipline types and sources authored. */
         private void createTable()
         {
-            /* Add all fields for database */
+            /* Add all fields for database and creates the table 'codex' */
             string sql = "create table codex (id integer primary key,"+
                 "name varchar(30),"+
                 "country varchar(30), "+
@@ -76,10 +82,11 @@ namespace HEMA_Codex
             command.ExecuteNonQuery();
         }
 
+        /* Adding a new record to the database */
         public void insertRecord(DatabaseRecord dbrecord)
         {
             /* Sql code to insert new record */
-            /* Insert all fields */
+            /* Inserts all fields to the table 'codex' */
             string sql = "INSERT into codex (name, country, school, date, discipline, source) values ('" + dbrecord.name + 
                 "', '" + dbrecord.country + 
                 "', '" + dbrecord.school + 
@@ -90,8 +97,11 @@ namespace HEMA_Codex
             command.ExecuteNonQuery();
         }
 
+        /* Database update function */
+        /* The table 'codex' will update the fields dependent of the selected ID */
         public void updateRecord(string id, DatabaseRecord dbrecord)
         {
+            /* Will delete all fields and ID from the table codex */ 
             string sql = "UPDATE codex WHERE id = "+id+
                 "SET name="+dbrecord.name+
                 "country="+dbrecord.country+
@@ -106,6 +116,7 @@ namespace HEMA_Codex
         /* Database Delete function */
         public void deleteRecord(string id)
         {
+            /* will delete the matching ID and all it's record from the database */
             string sql = "DELETE FROM codex WHERE id = " + id;
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
@@ -130,6 +141,7 @@ namespace HEMA_Codex
          * orders the entries by name and in a descending order.*/
         public DatabaseRecord getRecord(string id)
         {
+            /* Retreives the database fields of the matching ID */ 
             string sql = "SELECT * FROM codex WHERE id="+id+" ORDER BY name desc";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
