@@ -1,7 +1,11 @@
 ﻿/* Dean Marsh HND Software Development */
 /* HEMA Codex Project - Graded Unit 2 */
 /* Main code for Windows Form Storerecord in Application */
+// TODO: Rest of Coding, Internal Documentation, Testing and ReadMe/Technical Manual 
 
+
+
+/* Libaries used in program */
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -26,6 +30,12 @@ namespace HEMA_Codex
                     break;
                 case FormState.add:
                     formState = FormState.add;
+                    txtName.Text = "";
+                    txtCountry.Text = "";
+                    txtSchool.Text = "";
+                    txtDate.Text = "";
+                    txtDiscipline.Text = "";
+                    txtSource.Text = "";
                     break;
                 case FormState.edit:
                     formState = FormState.edit;
@@ -49,6 +59,7 @@ namespace HEMA_Codex
         /* Data dictionary set up for record id as key and name as value */
         private void refreshList()
         {
+            /* Refreshes the list to display the current IDs and Names in the database */
             lviewRecord.Items.Clear();
             Dictionary<string, string> recordList = new Dictionary<string, string>();
             recordList = hemaDatabase.getRecordList();
@@ -65,12 +76,6 @@ namespace HEMA_Codex
         {
             /* Clears all textboxes for next record to be added */ 
             setState(FormState.add);
-            txtName.Text = "";
-            txtCountry.Text = "";
-            txtSchool.Text = "";
-            txtDate.Text = "";
-            txtDiscipline.Text = "";
-            txtSource.Text = "";
         }
 
         private string getSelectedId()
@@ -120,7 +125,6 @@ namespace HEMA_Codex
 
             if (formState == FormState.add)
             {
-
                 hemaDatabase.insertRecord(entry);
             }
             else if( formState == FormState.edit)
@@ -129,12 +133,15 @@ namespace HEMA_Codex
                 if (id != null)
                 {
                     hemaDatabase.updateRecord(id, entry);
+                    this.refreshList();
                 }
             }
 
+            /* Refreshes the list view box */
             this.refreshList();
             setState(FormState.browse);
         }
+
 
         /* Delete function from List View and Database */
         private void btnDelete_Click(object sender, EventArgs e)
@@ -145,20 +152,26 @@ namespace HEMA_Codex
             string id = getSelectedId();
             if (id != null)
             {
-                DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNoCancel);
+
+                /* Dialog Box and buttons to display to confirm if the user does wish to confirm the deletion */
+                DialogResult result = MessageBox.Show("Are you sure you wish to delete this entry?", "Confirmation", MessageBoxButtons.YesNoCancel);
+
+                /* If the result is yes then record is deleted */
                 if (result == DialogResult.Yes)
                 {
-                   
+                    hemaDatabase.deleteRecord(id);
+                    this.refreshList();
+                    MessageBox.Show("Entry has been succesfully deleted.");
                 }
+
+                /* Does nothing if no is clicked */
                 else if (result == DialogResult.No)
                 {
-                    
+                    /* Do Nothing */
                 }
-                hemaDatabase.deleteRecord(id);
-                this.refreshList();
-                MessageBox.Show("Entry has been succesfully deleted.");
             }
             
+            /* Clears all textboxes of the deleted record fields */
             txtName.Text = "";
             txtCountry.Text = "";
             txtSchool.Text = "";

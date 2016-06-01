@@ -1,8 +1,10 @@
 ﻿/* Dean Marsh HND Software Development */
 /* HEMA Codex Project - Graded Unit 2 */
 /* Main class for the HEMA Database */
+/* This class holds all the SQL functions for a database */
 
-
+/* Libaries used in program */
+/* SQLite Library is unfamiliar and new to this project. */
 using System;
 using System.IO;
 using System.Data.SQLite;
