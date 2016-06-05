@@ -36,7 +36,7 @@ namespace HEMA_Codex
                     getSelectedRecord();
                     break;
 
-                    /* Form state changes to add when the user clicks the New button */
+                /* Form state changes to add when the user clicks the New button */
                 case FormState.add:
                     formState = FormState.add;
                     btnCancel.Enabled = true;
@@ -49,12 +49,13 @@ namespace HEMA_Codex
                     txtDate.Text = "";
                     txtDiscipline.Text = "";
                     txtSource.Text = "";
+                    txtAdditionalInfo.Text = "";
                     lblidvalue.Text = "** New Record **";
                     txtName.Focus();
                     break;
 
-                    /* Form state edit enables the save button to be clicked
-                    * if existing record is selected */
+                /* Form state edit enables the save button to be clicked
+                * if existing record is selected */
                 case FormState.edit:
                     formState = FormState.edit;
                     btnCancel.Enabled = true;
@@ -71,10 +72,10 @@ namespace HEMA_Codex
             InitializeComponent();
 
             /* Columns defined for the list view box */
-            lviewRecord.Columns.Add(new ColumnHeader());
-            lviewRecord.Columns[0].Text = "Id";
-            lviewRecord.Columns.Add(new ColumnHeader());
-            lviewRecord.Columns[1].Text = "Name";
+            listViewRecord.Columns.Add(new ColumnHeader());
+            listViewRecord.Columns[0].Text = "Id";
+            listViewRecord.Columns.Add(new ColumnHeader());
+            listViewRecord.Columns[1].Text = "Name";
 
             /* Event Handler if the text is changed from an existing record */ 
             txtName.KeyDown += new KeyEventHandler(recordEdited);
@@ -83,6 +84,7 @@ namespace HEMA_Codex
             txtDate.KeyDown += new KeyEventHandler(recordEdited);
             txtDiscipline.KeyDown += new KeyEventHandler(recordEdited);
             txtSource.KeyDown += new KeyEventHandler(recordEdited);
+            txtAdditionalInfo.KeyDown += new KeyEventHandler(recordEdited);
 
             try {
                 hemaDatabase = new HEMAdatabase();
@@ -97,7 +99,7 @@ namespace HEMA_Codex
 
         private void recordEdited(object sender, System.EventArgs e)
         {
-            if (formState == FormState.browse)
+            if ((formState == FormState.browse) && (getSelectedId()!=null))
             {
                 setState(FormState.edit);
             }
@@ -107,14 +109,14 @@ namespace HEMA_Codex
         private void refreshList()
         {
             /* Refreshes the list to display the current IDs and Names in the database */
-            lviewRecord.Items.Clear();
+            listViewRecord.Items.Clear();
             Dictionary<string, string> recordList = new Dictionary<string, string>();
             recordList = hemaDatabase.getRecordList();
 
             foreach (KeyValuePair<string, string> recordItem in recordList)
             {
                 ListViewItem lvItem = new ListViewItem(new string[] { recordItem.Key, recordItem.Value });
-                lviewRecord.Items.Add(lvItem);
+                listViewRecord.Items.Add(lvItem);
             }
         }
 
@@ -127,7 +129,7 @@ namespace HEMA_Codex
 
         private string getSelectedId()
         {
-            ListView.SelectedListViewItemCollection selectedItem = this.lviewRecord.SelectedItems;
+            ListView.SelectedListViewItemCollection selectedItem = this.listViewRecord.SelectedItems;
             string selectedId = null;
 
             /* If statement to check that ID exists and that ID can be printed*/
@@ -157,6 +159,7 @@ namespace HEMA_Codex
                 txtDate.Text = entry.date;
                 txtDiscipline.Text = entry.discipline;
                 txtSource.Text = entry.source;
+                txtAdditionalInfo.Text = entry.additionalinfo;
                 lblidvalue.Text = id;
             } 
         }
@@ -178,6 +181,8 @@ namespace HEMA_Codex
             entry.date = txtDate.Text;
             entry.discipline = txtDiscipline.Text;
             entry.source = txtSource.Text;
+            entry.additionalinfo = txtAdditionalInfo.Text;
+       
 
             /* If the form state is set to add then they information to entry is added as a new record */
             if (formState == FormState.add)
@@ -237,6 +242,7 @@ namespace HEMA_Codex
             txtDate.Text = "";
             txtDiscipline.Text = "";
             txtSource.Text = "";
+            txtAdditionalInfo.Text = "";
             lblidvalue.Text = "...";
         }
 

@@ -23,6 +23,7 @@ namespace HEMA_Codex
         public string date;
         public string discipline;
         public string source;
+        public string additionalinfo;
     }
 
 
@@ -70,7 +71,8 @@ namespace HEMA_Codex
                 "school varchar(40), "+
                 " date varchar(10),"+
                 " discipline varchar(60),"+
-                " source varchar(40))";
+                " source varchar(60),"+
+                " additionalinfo varchar(100))";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
         }
@@ -80,11 +82,12 @@ namespace HEMA_Codex
         {
             /* Sql code to insert new record */
             /* Inserts all fields to the table 'codex' */
-            string sql = "INSERT into codex (name, country, school, date, discipline, source) values ('" + dbrecord.name + 
+            string sql = "INSERT into codex (name, country, school, date, discipline, additionalinfo, source) values ('" + dbrecord.name + 
                 "', '" + dbrecord.country + 
                 "', '" + dbrecord.school + 
                 "', '" + dbrecord.date + 
-                "', '" + dbrecord.discipline + 
+                "', '" + dbrecord.discipline +
+                "', '" + dbrecord.additionalinfo +
                 "', '" + dbrecord.source + "')";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
@@ -101,6 +104,7 @@ namespace HEMA_Codex
                 ", school='" + dbrecord.school + "'" +
                 ", date='" + dbrecord.date + "'" +
                 ", discipline='" + dbrecord.discipline + "'" +
+                ", additionalinfo='" + dbrecord.additionalinfo + "'" +
                 ", source='" + dbrecord.source + "'" +
                 " WHERE id = '" + id + "';";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
@@ -148,6 +152,7 @@ namespace HEMA_Codex
                 databaseRecord.school = reader["school"].ToString();
                 databaseRecord.date = reader["date"].ToString();
                 databaseRecord.discipline = reader["discipline"].ToString();
+                databaseRecord.additionalinfo = reader["additionalinfo"].ToString();
                 databaseRecord.source = reader["source"].ToString();
             }
 

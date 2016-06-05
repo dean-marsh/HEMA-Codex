@@ -29,14 +29,17 @@
         private void InitializeComponent()
         {
             this.gboxDisplay = new System.Windows.Forms.GroupBox();
-            this.lviewRecord = new System.Windows.Forms.ListView();
+            this.listViewRecord = new System.Windows.Forms.ListView();
             this.gboxInfo = new System.Windows.Forms.GroupBox();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.lblidvalue = new System.Windows.Forms.Label();
+            this.lblid = new System.Windows.Forms.Label();
             this.lblDiscipline = new System.Windows.Forms.Label();
             this.txtDiscipline = new System.Windows.Forms.TextBox();
             this.txtDate = new System.Windows.Forms.TextBox();
             this.lblSchool = new System.Windows.Forms.Label();
             this.txtSchool = new System.Windows.Forms.TextBox();
-            this.txtAddonInfo = new System.Windows.Forms.TextBox();
+            this.txtAdditionalInfo = new System.Windows.Forms.TextBox();
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.lblCountry = new System.Windows.Forms.Label();
@@ -48,16 +51,13 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.lblid = new System.Windows.Forms.Label();
-            this.lblidvalue = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.gboxDisplay.SuspendLayout();
             this.gboxInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // gboxDisplay
             // 
-            this.gboxDisplay.Controls.Add(this.lviewRecord);
+            this.gboxDisplay.Controls.Add(this.listViewRecord);
             this.gboxDisplay.Location = new System.Drawing.Point(12, 12);
             this.gboxDisplay.Name = "gboxDisplay";
             this.gboxDisplay.Size = new System.Drawing.Size(296, 388);
@@ -65,17 +65,17 @@
             this.gboxDisplay.TabStop = false;
             this.gboxDisplay.Text = "Entries";
             // 
-            // lviewRecord
+            // listViewRecord
             // 
-            this.lviewRecord.FullRowSelect = true;
-            this.lviewRecord.HideSelection = false;
-            this.lviewRecord.Location = new System.Drawing.Point(6, 19);
-            this.lviewRecord.Name = "lviewRecord";
-            this.lviewRecord.Size = new System.Drawing.Size(278, 361);
-            this.lviewRecord.TabIndex = 0;
-            this.lviewRecord.UseCompatibleStateImageBehavior = false;
-            this.lviewRecord.View = System.Windows.Forms.View.Details;
-            this.lviewRecord.SelectedIndexChanged += new System.EventHandler(this.lviewRecord_SelectedIndexChanged);
+            this.listViewRecord.FullRowSelect = true;
+            this.listViewRecord.HideSelection = false;
+            this.listViewRecord.Location = new System.Drawing.Point(6, 19);
+            this.listViewRecord.Name = "listViewRecord";
+            this.listViewRecord.Size = new System.Drawing.Size(278, 361);
+            this.listViewRecord.TabIndex = 0;
+            this.listViewRecord.UseCompatibleStateImageBehavior = false;
+            this.listViewRecord.View = System.Windows.Forms.View.Details;
+            this.listViewRecord.SelectedIndexChanged += new System.EventHandler(this.lviewRecord_SelectedIndexChanged);
             // 
             // gboxInfo
             // 
@@ -87,7 +87,7 @@
             this.gboxInfo.Controls.Add(this.txtDate);
             this.gboxInfo.Controls.Add(this.lblSchool);
             this.gboxInfo.Controls.Add(this.txtSchool);
-            this.gboxInfo.Controls.Add(this.txtAddonInfo);
+            this.gboxInfo.Controls.Add(this.txtAdditionalInfo);
             this.gboxInfo.Controls.Add(this.lblInfo);
             this.gboxInfo.Controls.Add(this.lblName);
             this.gboxInfo.Controls.Add(this.lblCountry);
@@ -106,6 +106,35 @@
             this.gboxInfo.TabStop = false;
             this.gboxInfo.Text = "Information";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Enabled = false;
+            this.btnCancel.Location = new System.Drawing.Point(144, 355);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 25;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // lblidvalue
+            // 
+            this.lblidvalue.AutoSize = true;
+            this.lblidvalue.Location = new System.Drawing.Point(127, 19);
+            this.lblidvalue.Name = "lblidvalue";
+            this.lblidvalue.Size = new System.Drawing.Size(16, 13);
+            this.lblidvalue.TabIndex = 24;
+            this.lblidvalue.Text = "...";
+            // 
+            // lblid
+            // 
+            this.lblid.AutoSize = true;
+            this.lblid.Location = new System.Drawing.Point(98, 19);
+            this.lblid.Name = "lblid";
+            this.lblid.Size = new System.Drawing.Size(21, 13);
+            this.lblid.TabIndex = 23;
+            this.lblid.Text = "ID:";
+            // 
             // lblDiscipline
             // 
             this.lblDiscipline.AutoSize = true;
@@ -118,6 +147,7 @@
             // txtDiscipline
             // 
             this.txtDiscipline.Location = new System.Drawing.Point(130, 144);
+            this.txtDiscipline.MaxLength = 60;
             this.txtDiscipline.Multiline = true;
             this.txtDiscipline.Name = "txtDiscipline";
             this.txtDiscipline.Size = new System.Drawing.Size(235, 40);
@@ -126,6 +156,7 @@
             // txtDate
             // 
             this.txtDate.Location = new System.Drawing.Point(130, 118);
+            this.txtDate.MaxLength = 10;
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(235, 20);
             this.txtDate.TabIndex = 5;
@@ -142,17 +173,19 @@
             // txtSchool
             // 
             this.txtSchool.Location = new System.Drawing.Point(130, 92);
+            this.txtSchool.MaxLength = 40;
             this.txtSchool.Name = "txtSchool";
             this.txtSchool.Size = new System.Drawing.Size(235, 20);
             this.txtSchool.TabIndex = 4;
             // 
-            // txtAddonInfo
+            // txtAdditionalInfo
             // 
-            this.txtAddonInfo.Location = new System.Drawing.Point(9, 258);
-            this.txtAddonInfo.Multiline = true;
-            this.txtAddonInfo.Name = "txtAddonInfo";
-            this.txtAddonInfo.Size = new System.Drawing.Size(383, 90);
-            this.txtAddonInfo.TabIndex = 15;
+            this.txtAdditionalInfo.Location = new System.Drawing.Point(9, 258);
+            this.txtAdditionalInfo.MaxLength = 100;
+            this.txtAdditionalInfo.Multiline = true;
+            this.txtAdditionalInfo.Name = "txtAdditionalInfo";
+            this.txtAdditionalInfo.Size = new System.Drawing.Size(383, 90);
+            this.txtAdditionalInfo.TabIndex = 15;
             // 
             // lblInfo
             // 
@@ -184,6 +217,7 @@
             // txtSource
             // 
             this.txtSource.Location = new System.Drawing.Point(130, 190);
+            this.txtSource.MaxLength = 60;
             this.txtSource.Multiline = true;
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(235, 47);
@@ -210,6 +244,7 @@
             // txtCountry
             // 
             this.txtCountry.Location = new System.Drawing.Point(130, 66);
+            this.txtCountry.MaxLength = 30;
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(235, 20);
             this.txtCountry.TabIndex = 1;
@@ -238,6 +273,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(130, 40);
+            this.txtName.MaxLength = 30;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(235, 20);
             this.txtName.TabIndex = 0;
@@ -251,35 +287,6 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // lblid
-            // 
-            this.lblid.AutoSize = true;
-            this.lblid.Location = new System.Drawing.Point(98, 19);
-            this.lblid.Name = "lblid";
-            this.lblid.Size = new System.Drawing.Size(21, 13);
-            this.lblid.TabIndex = 23;
-            this.lblid.Text = "ID:";
-            // 
-            // lblidvalue
-            // 
-            this.lblidvalue.AutoSize = true;
-            this.lblidvalue.Location = new System.Drawing.Point(127, 19);
-            this.lblidvalue.Name = "lblidvalue";
-            this.lblidvalue.Size = new System.Drawing.Size(16, 13);
-            this.lblidvalue.TabIndex = 24;
-            this.lblidvalue.Text = "...";
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Enabled = false;
-            this.btnCancel.Location = new System.Drawing.Point(144, 355);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 25;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // StoreRecord
             // 
@@ -300,14 +307,14 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gboxDisplay;
-        private System.Windows.Forms.ListView lviewRecord;
+        private System.Windows.Forms.ListView listViewRecord;
         private System.Windows.Forms.GroupBox gboxInfo;
         private System.Windows.Forms.Label lblDiscipline;
         private System.Windows.Forms.TextBox txtDiscipline;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.Label lblSchool;
         private System.Windows.Forms.TextBox txtSchool;
-        private System.Windows.Forms.TextBox txtAddonInfo;
+        private System.Windows.Forms.TextBox txtAdditionalInfo;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblCountry;
