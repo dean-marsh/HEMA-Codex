@@ -48,6 +48,9 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.lblid = new System.Windows.Forms.Label();
+            this.lblidvalue = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.gboxDisplay.SuspendLayout();
             this.gboxInfo.SuspendLayout();
             this.SuspendLayout();
@@ -57,16 +60,18 @@
             this.gboxDisplay.Controls.Add(this.lviewRecord);
             this.gboxDisplay.Location = new System.Drawing.Point(12, 12);
             this.gboxDisplay.Name = "gboxDisplay";
-            this.gboxDisplay.Size = new System.Drawing.Size(296, 361);
+            this.gboxDisplay.Size = new System.Drawing.Size(296, 388);
             this.gboxDisplay.TabIndex = 21;
             this.gboxDisplay.TabStop = false;
             this.gboxDisplay.Text = "Entries";
             // 
             // lviewRecord
             // 
+            this.lviewRecord.FullRowSelect = true;
+            this.lviewRecord.HideSelection = false;
             this.lviewRecord.Location = new System.Drawing.Point(6, 19);
             this.lviewRecord.Name = "lviewRecord";
-            this.lviewRecord.Size = new System.Drawing.Size(278, 332);
+            this.lviewRecord.Size = new System.Drawing.Size(278, 361);
             this.lviewRecord.TabIndex = 0;
             this.lviewRecord.UseCompatibleStateImageBehavior = false;
             this.lviewRecord.View = System.Windows.Forms.View.Details;
@@ -74,6 +79,9 @@
             // 
             // gboxInfo
             // 
+            this.gboxInfo.Controls.Add(this.btnCancel);
+            this.gboxInfo.Controls.Add(this.lblidvalue);
+            this.gboxInfo.Controls.Add(this.lblid);
             this.gboxInfo.Controls.Add(this.lblDiscipline);
             this.gboxInfo.Controls.Add(this.txtDiscipline);
             this.gboxInfo.Controls.Add(this.txtDate);
@@ -93,7 +101,7 @@
             this.gboxInfo.Controls.Add(this.btnDelete);
             this.gboxInfo.Location = new System.Drawing.Point(314, 12);
             this.gboxInfo.Name = "gboxInfo";
-            this.gboxInfo.Size = new System.Drawing.Size(396, 361);
+            this.gboxInfo.Size = new System.Drawing.Size(396, 388);
             this.gboxInfo.TabIndex = 20;
             this.gboxInfo.TabStop = false;
             this.gboxInfo.Text = "Information";
@@ -101,7 +109,7 @@
             // lblDiscipline
             // 
             this.lblDiscipline.AutoSize = true;
-            this.lblDiscipline.Location = new System.Drawing.Point(55, 138);
+            this.lblDiscipline.Location = new System.Drawing.Point(52, 156);
             this.lblDiscipline.Name = "lblDiscipline";
             this.lblDiscipline.Size = new System.Drawing.Size(66, 13);
             this.lblDiscipline.TabIndex = 22;
@@ -109,7 +117,7 @@
             // 
             // txtDiscipline
             // 
-            this.txtDiscipline.Location = new System.Drawing.Point(127, 123);
+            this.txtDiscipline.Location = new System.Drawing.Point(130, 144);
             this.txtDiscipline.Multiline = true;
             this.txtDiscipline.Name = "txtDiscipline";
             this.txtDiscipline.Size = new System.Drawing.Size(235, 40);
@@ -117,7 +125,7 @@
             // 
             // txtDate
             // 
-            this.txtDate.Location = new System.Drawing.Point(127, 97);
+            this.txtDate.Location = new System.Drawing.Point(130, 118);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(235, 20);
             this.txtDate.TabIndex = 5;
@@ -125,7 +133,7 @@
             // lblSchool
             // 
             this.lblSchool.AutoSize = true;
-            this.lblSchool.Location = new System.Drawing.Point(78, 74);
+            this.lblSchool.Location = new System.Drawing.Point(75, 95);
             this.lblSchool.Name = "lblSchool";
             this.lblSchool.Size = new System.Drawing.Size(43, 13);
             this.lblSchool.TabIndex = 11;
@@ -133,14 +141,14 @@
             // 
             // txtSchool
             // 
-            this.txtSchool.Location = new System.Drawing.Point(127, 71);
+            this.txtSchool.Location = new System.Drawing.Point(130, 92);
             this.txtSchool.Name = "txtSchool";
             this.txtSchool.Size = new System.Drawing.Size(235, 20);
             this.txtSchool.TabIndex = 4;
             // 
             // txtAddonInfo
             // 
-            this.txtAddonInfo.Location = new System.Drawing.Point(6, 237);
+            this.txtAddonInfo.Location = new System.Drawing.Point(9, 258);
             this.txtAddonInfo.Multiline = true;
             this.txtAddonInfo.Name = "txtAddonInfo";
             this.txtAddonInfo.Size = new System.Drawing.Size(383, 90);
@@ -149,7 +157,7 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(5, 218);
+            this.lblInfo.Location = new System.Drawing.Point(8, 239);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(111, 13);
             this.lblInfo.TabIndex = 16;
@@ -158,7 +166,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(78, 22);
+            this.lblName.Location = new System.Drawing.Point(81, 43);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(38, 13);
             this.lblName.TabIndex = 9;
@@ -167,7 +175,7 @@
             // lblCountry
             // 
             this.lblCountry.AutoSize = true;
-            this.lblCountry.Location = new System.Drawing.Point(72, 48);
+            this.lblCountry.Location = new System.Drawing.Point(75, 69);
             this.lblCountry.Name = "lblCountry";
             this.lblCountry.Size = new System.Drawing.Size(49, 13);
             this.lblCountry.TabIndex = 10;
@@ -175,7 +183,7 @@
             // 
             // txtSource
             // 
-            this.txtSource.Location = new System.Drawing.Point(127, 169);
+            this.txtSource.Location = new System.Drawing.Point(130, 190);
             this.txtSource.Multiline = true;
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(235, 47);
@@ -184,7 +192,7 @@
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(55, 100);
+            this.lblDate.Location = new System.Drawing.Point(52, 121);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(66, 13);
             this.lblDate.TabIndex = 12;
@@ -193,7 +201,7 @@
             // lblSource
             // 
             this.lblSource.AutoSize = true;
-            this.lblSource.Location = new System.Drawing.Point(20, 172);
+            this.lblSource.Location = new System.Drawing.Point(17, 193);
             this.lblSource.Name = "lblSource";
             this.lblSource.Size = new System.Drawing.Size(101, 13);
             this.lblSource.TabIndex = 13;
@@ -201,14 +209,15 @@
             // 
             // txtCountry
             // 
-            this.txtCountry.Location = new System.Drawing.Point(127, 45);
+            this.txtCountry.Location = new System.Drawing.Point(130, 66);
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(235, 20);
             this.txtCountry.TabIndex = 1;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(222, 334);
+            this.btnSave.Enabled = false;
+            this.btnSave.Location = new System.Drawing.Point(225, 355);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 8;
@@ -218,7 +227,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(303, 334);
+            this.btnAdd.Location = new System.Drawing.Point(306, 355);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(86, 23);
             this.btnAdd.TabIndex = 6;
@@ -228,14 +237,14 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(127, 19);
+            this.txtName.Location = new System.Drawing.Point(130, 40);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(235, 20);
             this.txtName.TabIndex = 0;
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(6, 338);
+            this.btnDelete.Location = new System.Drawing.Point(9, 359);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 7;
@@ -243,11 +252,40 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // lblid
+            // 
+            this.lblid.AutoSize = true;
+            this.lblid.Location = new System.Drawing.Point(98, 19);
+            this.lblid.Name = "lblid";
+            this.lblid.Size = new System.Drawing.Size(21, 13);
+            this.lblid.TabIndex = 23;
+            this.lblid.Text = "ID:";
+            // 
+            // lblidvalue
+            // 
+            this.lblidvalue.AutoSize = true;
+            this.lblidvalue.Location = new System.Drawing.Point(127, 19);
+            this.lblidvalue.Name = "lblidvalue";
+            this.lblidvalue.Size = new System.Drawing.Size(16, 13);
+            this.lblidvalue.TabIndex = 24;
+            this.lblidvalue.Text = "...";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Enabled = false;
+            this.btnCancel.Location = new System.Drawing.Point(144, 355);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 25;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // StoreRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(715, 381);
+            this.ClientSize = new System.Drawing.Size(715, 404);
             this.Controls.Add(this.gboxDisplay);
             this.Controls.Add(this.gboxInfo);
             this.Name = "StoreRecord";
@@ -281,6 +319,9 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label lblidvalue;
+        private System.Windows.Forms.Label lblid;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
 

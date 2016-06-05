@@ -5,7 +5,6 @@
 
 /* Libaries used in program */
 /* SQLite Library is unfamiliar and new to this project. */
-using System;
 using System.IO;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -41,24 +40,16 @@ namespace HEMA_Codex
             initDatabase();
         }
 
-        /* Create the database */
-        /* Error handler to make sure database exists or it will create one if not */
+        /* Create and connect to database file, make sure table is available */
         private void initDatabase()
         {
-            // File.Delete(db_name);
             if (!File.Exists(db_name))
             {
                 SQLiteConnection.CreateFile(db_name);
             }
-            try
-            {
-                connectToDatabase();
-                createTable();
-            }
-            catch (SQLiteException ex)
-            {
-                Console.WriteLine("Table not created.");
-            }
+            /* SQL Exceptions to be handled in user interface code */
+            connectToDatabase();
+            createTable();
         }
 
         /* Open a connection to the database */
@@ -73,7 +64,7 @@ namespace HEMA_Codex
         private void createTable()
         {
             /* Add all fields for database and creates the table 'codex' */
-            string sql = "create table codex (id integer primary key,"+
+            string sql = "create table if not exists codex (id integer primary key,"+
                 "name varchar(30),"+
                 "country varchar(30), "+
                 "school varchar(40), "+
@@ -103,14 +94,15 @@ namespace HEMA_Codex
         /* The table 'codex' will update the fields dependent of the selected ID */
         public void updateRecord(string id, DatabaseRecord dbrecord)
         {
-            /* Will delete all fields and ID from the table codex */ 
-            string sql = "UPDATE codex WHERE id = "+id+
-                "SET name="+dbrecord.name+
-                "country="+dbrecord.country+
-                "school="+dbrecord.school+
-                "date="+dbrecord.date+
-                "discipline="+dbrecord.discipline+
-                "source="+dbrecord.source;
+            /* Will delete all fields and ID from the table codex */
+            string sql = "UPDATE codex" +
+                " SET name='" + dbrecord.name + "'" +
+                ", country='" + dbrecord.country + "'" +
+                ", school='" + dbrecord.school + "'" +
+                ", date='" + dbrecord.date + "'" +
+                ", discipline='" + dbrecord.discipline + "'" +
+                ", source='" + dbrecord.source + "'" +
+                " WHERE id = '" + id + "';";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
         }
