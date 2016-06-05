@@ -86,6 +86,7 @@ namespace HEMA_Codex
             txtSource.KeyDown += new KeyEventHandler(recordEdited);
             txtAdditionalInfo.KeyDown += new KeyEventHandler(recordEdited);
 
+            /* Error Handler */
             try {
                 hemaDatabase = new HEMAdatabase();
                 this.refreshList();
@@ -96,7 +97,7 @@ namespace HEMA_Codex
         }
 
 
-
+        /* Changes the default state of the Form from Browse to Edit */ 
         private void recordEdited(object sender, System.EventArgs e)
         {
             if ((formState == FormState.browse) && (getSelectedId()!=null))
@@ -127,6 +128,7 @@ namespace HEMA_Codex
             setState(FormState.add);
         }
 
+        /* Returns the information of the selected ID */
         private string getSelectedId()
         {
             ListView.SelectedListViewItemCollection selectedItem = this.listViewRecord.SelectedItems;
