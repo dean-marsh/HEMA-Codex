@@ -1,7 +1,7 @@
 ﻿/* Dean Marsh HND Software Development */
 /* HEMA Codex Project - Graded Unit 2 */
 /* Main code for Windows Form Storerecord in Application */
-/* Coding of the UI Domain for application */ 
+/* Coding of the UI Domain for application */
 
 
 /* Libaries used in program */
@@ -77,7 +77,7 @@ namespace HEMA_Codex
             listViewRecord.Columns.Add(new ColumnHeader());
             listViewRecord.Columns[1].Text = "Name";
 
-            /* Event Handler if the text is changed from an existing record */ 
+            /* Event Handler if the text is changed from an existing record */
             txtName.KeyDown += new KeyEventHandler(recordEdited);
             txtCountry.KeyDown += new KeyEventHandler(recordEdited);
             txtSchool.KeyDown += new KeyEventHandler(recordEdited);
@@ -87,20 +87,23 @@ namespace HEMA_Codex
             txtAdditionalInfo.KeyDown += new KeyEventHandler(recordEdited);
 
             /* Error Handler */
-            try {
+            try
+            {
                 hemaDatabase = new HEMAdatabase();
                 this.refreshList();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 /* Failed to connect to database, user message displayed */
                 MessageBox.Show(ex.ToString());
             }
         }
 
 
-        /* Changes the default state of the Form from Browse to Edit */ 
+        /* Changes the default state of the Form from Browse to Edit */
         private void recordEdited(object sender, System.EventArgs e)
         {
-            if ((formState == FormState.browse) && (getSelectedId()!=null))
+            if ((formState == FormState.browse) && (getSelectedId() != null))
             {
                 setState(FormState.edit);
             }
@@ -124,7 +127,7 @@ namespace HEMA_Codex
         /* Add New function set up to clear the textbxoes for a new record to be added */
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            /* Clears all textboxes for next record to be added */ 
+            /* Clears all textboxes for next record to be added */
             setState(FormState.add);
         }
 
@@ -145,7 +148,7 @@ namespace HEMA_Codex
             return selectedId;
         }
 
-        /* Function for returning information back from a selected record to the textboxes */ 
+        /* Function for returning information back from a selected record to the textboxes */
         private void getSelectedRecord()
         {
             /* Checks that the ID exists to retreive the record */
@@ -163,7 +166,7 @@ namespace HEMA_Codex
                 txtSource.Text = entry.source;
                 txtAdditionalInfo.Text = entry.additionalinfo;
                 lblidvalue.Text = id;
-            } 
+            }
         }
 
         /* Index for selecting and updating the records within the program  */
@@ -184,7 +187,7 @@ namespace HEMA_Codex
             entry.discipline = txtDiscipline.Text;
             entry.source = txtSource.Text;
             entry.additionalinfo = txtAdditionalInfo.Text;
-       
+
 
             /* If the form state is set to add then they information to entry is added as a new record */
             if (formState == FormState.add)
@@ -193,7 +196,7 @@ namespace HEMA_Codex
             }
 
             /* Else if it the form state is in edit then exists the existing record that has been selected */
-            else if( formState == FormState.edit)
+            else if (formState == FormState.edit)
             {
                 string id = getSelectedId();
                 if (id != null)
@@ -236,8 +239,25 @@ namespace HEMA_Codex
                     /* Do Nothing */
                 }
             }
-            
+
             /* Clears all textboxes of the deleted record fields */
+            clearText();
+        }
+
+
+        /* Cancel function for if the user wishes to cancel adding their new entry.  */
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            /* Sets the form state back to browse */
+            clearText();
+            setState(FormState.browse);
+            MessageBox.Show("Cancelled");
+
+        }
+
+        /* Function setup to call in for clearing the textboxes*/
+        private void clearText()
+        {
             txtName.Text = "";
             txtCountry.Text = "";
             txtSchool.Text = "";
@@ -246,14 +266,6 @@ namespace HEMA_Codex
             txtSource.Text = "";
             txtAdditionalInfo.Text = "";
             lblidvalue.Text = "...";
-        }
-
-
-        /* Cancel function for if the user wishes to cancel adding their new entry.  */
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            /* Sets the form state back to browse */
-            setState(FormState.browse);
         }
     }
 }

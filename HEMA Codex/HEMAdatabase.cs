@@ -65,31 +65,36 @@ namespace HEMA_Codex
         private void createTable()
         {
             /* Add all fields for database and creates the table 'codex' */
-            string sql = "create table if not exists codex (id integer primary key,"+
-                "name varchar(30),"+
-                "country varchar(30), "+
-                "school varchar(40), "+
-                " date varchar(10),"+
-                " discipline varchar(60),"+
-                " source varchar(60),"+
+            string sql = "create table if not exists codex (id integer primary key," +
+                "name varchar(30)," +
+                "country varchar(30), " +
+                "school varchar(40), " +
+                " date varchar(10)," +
+                " discipline varchar(60)," +
+                " source varchar(60)," +
                 " additionalinfo varchar(100))";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
         }
+
 
         /* Adding a new record to the database */
         public void insertRecord(DatabaseRecord dbrecord)
         {
             /* Sql code to insert new record */
             /* Inserts all fields to the table 'codex' */
-            string sql = "INSERT into codex (name, country, school, date, discipline, additionalinfo, source) values ('" + dbrecord.name + 
-                "', '" + dbrecord.country + 
-                "', '" + dbrecord.school + 
-                "', '" + dbrecord.date + 
-                "', '" + dbrecord.discipline +
-                "', '" + dbrecord.additionalinfo +
-                "', '" + dbrecord.source + "')";
-            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+            /* Paramters set up to escape SQL string characters that would cause error in program */
+            /* Therefore parameters are set up to accept these characters to escape SQL errors */
+            SQLiteCommand command = m_dbConnection.CreateCommand();
+            command.CommandText = "INSERT into codex (name, country, school, date, discipline, additionalinfo, source) " +
+                "values (@name, @country, @school, @date, @discipline, @additionalinfo, @source);"; ;
+            command.Parameters.AddWithValue("name", dbrecord.name);
+            command.Parameters.AddWithValue("country", dbrecord.country);
+            command.Parameters.AddWithValue("school", dbrecord.school);
+            command.Parameters.AddWithValue("date", dbrecord.date);
+            command.Parameters.AddWithValue("discipline", dbrecord.discipline);
+            command.Parameters.AddWithValue("additionalinfo", dbrecord.additionalinfo);
+            command.Parameters.AddWithValue("source", dbrecord.source);
             command.ExecuteNonQuery();
         }
 
@@ -98,16 +103,19 @@ namespace HEMA_Codex
         public void updateRecord(string id, DatabaseRecord dbrecord)
         {
             /* Will delete all fields and ID from the table codex */
-            string sql = "UPDATE codex" +
-                " SET name='" + dbrecord.name + "'" +
-                ", country='" + dbrecord.country + "'" +
-                ", school='" + dbrecord.school + "'" +
-                ", date='" + dbrecord.date + "'" +
-                ", discipline='" + dbrecord.discipline + "'" +
-                ", additionalinfo='" + dbrecord.additionalinfo + "'" +
-                ", source='" + dbrecord.source + "'" +
-                " WHERE id = '" + id + "';";
-            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+            /* Paramters set up to escape SQL string characters that would cause error in program */
+            SQLiteCommand command = m_dbConnection.CreateCommand();
+            command.CommandText = "UPDATE codex" +
+                " SET name=@name, country=@country, school=@school, date=@date," +
+                " discipline=@discipline, additionalinfo=@additionalinfo, source=@source WHERE id=@id;";
+            command.Parameters.AddWithValue("name", dbrecord.name);
+            command.Parameters.AddWithValue("country", dbrecord.country);
+            command.Parameters.AddWithValue("school", dbrecord.school);
+            command.Parameters.AddWithValue("date", dbrecord.date);
+            command.Parameters.AddWithValue("discipline", dbrecord.discipline);
+            command.Parameters.AddWithValue("additionalinfo", dbrecord.additionalinfo);
+            command.Parameters.AddWithValue("source", dbrecord.source);
+            command.Parameters.AddWithValue("id", id);
             command.ExecuteNonQuery();
         }
 
@@ -139,8 +147,8 @@ namespace HEMA_Codex
          * orders the entries by name and in a descending order.*/
         public DatabaseRecord getRecord(string id)
         {
-            /* Retreives the database fields of the matching ID */ 
-            string sql = "SELECT * FROM codex WHERE id="+id+" ORDER BY name desc";
+            /* Retreives the database fields of the matching ID */
+            string sql = "SELECT * FROM codex WHERE id=" + id + " ORDER BY name desc";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
             DatabaseRecord databaseRecord = new DatabaseRecord();
@@ -156,7 +164,7 @@ namespace HEMA_Codex
                 databaseRecord.source = reader["source"].ToString();
             }
 
-            /* Returns all above information from record*/ 
+            /* Returns all above information from record*/
             return databaseRecord;
         }
     }
